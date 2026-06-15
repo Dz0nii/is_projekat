@@ -18,7 +18,7 @@ Balansiranje:
   - Pozitivni tile-ovi: sadrže parkove (mask > MIN_PARK_RATIO)
   - Negativni tile-ovi: bez parkova, čuva se max MAX_NEGATIVE_RATIO × broj pozitivnih
 
-Instalacija:
+Instalacija:mis
     pip install rasterio numpy tqdm
 """
 
@@ -28,14 +28,16 @@ import rasterio
 from rasterio.windows import Window
 from pathlib import Path
 from tqdm import tqdm
+import os
 
-# ─────────────────────────────────────────────────────────
-#  PODEŠAVANJA — menjaj ovde
-# ─────────────────────────────────────────────────────────
 
-CITY_NAME       = "hamburg"               # ime grada → prefiks tile-ova
-SATELLITE_PATH  = "raw/hamburg.tiff"       # putanja do satelitskog snimka
-MASK_PATH       = "raw/hamburg_mask.tif"  # putanja do maske
+# Putanja do foldera u kom se nalazi ova skripta (data_processing/)
+SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+
+CITY_NAME       = "frankfurt"               # ime grada → prefiks tile-ova
+SATELLITE_PATH  = os.path.join(PROJECT_ROOT, "podaci", "raw_novi", "frankfurt.tiff")        # putanja do satelitskog snimka
+MASK_PATH       = os.path.join(PROJECT_ROOT, "podaci", "raw_novi", "frankfurt_maska.tif")   # putanja do maske
 
 TILE_SIZE       = 256                     # veličina tile-a u pikselima
 OVERLAP         = 0                       # overlap između tile-ova (0 = bez overlapa)
@@ -43,7 +45,7 @@ MIN_PARK_RATIO  = 0.01                    # minimalno % parkova da se smatra poz
 MAX_NEGATIVE_RATIO = 0.5                  # max negativnih = ovaj broj × broj pozitivnih
 
 SEED            = 42                      # reproduktibilnost
-OUTPUT_DIR      = Path("dataset")
+OUTPUT_DIR      = Path(os.path.join(PROJECT_ROOT, "podaci", "predikcija"))
 
 # ─────────────────────────────────────────────────────────
 

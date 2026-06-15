@@ -19,16 +19,20 @@ import rasterio
 from PIL import Image
 from pathlib import Path
 from tqdm import tqdm
+import os
 
 # ─────────────────────────────────────────────────────────
 #  PODEŠAVANJA — menjaj ovde
 # ─────────────────────────────────────────────────────────
 
-CITY_NAME   = "hamburg"       # mora da se poklapa sa tile_city.py
+CITY_NAME   = "stutgard"       # mora da se poklapa sa tile_city.py
 DARKEN      = 0.35            # koliko zatamniti non-park (0=crno, 1=originalno)
 
-DATASET_DIR = Path("dataset")
-OUTPUT_DIR  = Path("provera")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+
+DATASET_DIR = Path(os.path.join(PROJECT_ROOT, "podaci", "dataset_novi"))
+OUTPUT_DIR   = Path(os.path.join(PROJECT_ROOT, "podaci", "provera_novi"))
 
 # ─────────────────────────────────────────────────────────
 

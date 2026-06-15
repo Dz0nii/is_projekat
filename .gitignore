@@ -1,6 +1,6 @@
-raw/
-provera/
-data/
-dataset/
-*.tiff
-*.tif
+venv312/
+podaci/
+*.pth
+*.rar
+__pycache__/
+*.pyc
