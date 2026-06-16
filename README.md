@@ -133,20 +133,35 @@ Poređenje oba modela sa grafikama dostupno je pokretanjem `src/uporedi_modele.p
 ```
 is_park_segmentation/
 ├── src/
-│   ├── train.py                 # trening U-Net modela
-│   ├── train_deeplabv3.py       # trening DeepLabV3+ modela
-│   ├── predict.py               # univerzalna predikcija (oba modela)
+│   ├── train_unet.py            # trening U-Net modela
+│   ├── train_dlvthree.py        # trening DeepLabV3+ modela
+│   ├── testiranje.py            # predikcija na test skupu (oba modela)
 │   ├── provera_pred.py          # evaluacija i metrike
 │   ├── uporedi_modele.py        # poređenje modela + grafici
 │   ├── vizualizuj_unet.py       # vizualizacija encoder/decoder mapa
-│   └── data_processing/
-│       ├── warp_maski.py        # reprojekcija maski (CRS fix)
-│       ├── tile_city.py         # isecanje slika na tile-ove
-│       └── build_tiles.py       # kreiranje uniformnog dataseta
+│   ├── vizualizuj_poredjenje.py # vizualizacija predikcija UNet vs DeepLabV3+
+│   └── evolucija_treninga.py    # metrike i vizualizacija napretka kroz epohe
+├── data_processing/
+│   ├── warp_maski.py            # reprojekcija maski (CRS fix)
+│   ├── tile_city.py             # isecanje slika na tile-ove
+│   ├── build_tiles.py           # kreiranje uniformnog dataseta
+│   └── provera_maski.py         # provera ispravnosti maski
 ├── podaci/                      # dataset (preuzeti zasebno)
-├── models/                      # istrenirani modeli (preuzeti zasebno)
-├── dokumentacija_projekta.docx  # detaljna dokumentacija
-├── pyproject.toml
+├── models/
+│   ├── Unet_model.pth           # finalni U-Net model (preuzeti zasebno)
+│   ├── park_model_deeplabv3_best.pth  # finalni DeepLabV3+ model (preuzeti zasebno)
+│   └── evolucija/               # checkpoint modeli po epohama (preuzeti zasebno)
+│       ├── unet/                # unet_epoch_05.pth ... unet_epoch_50.pth, unet_best.pth
+│       └── deeplabv3/           # deeplabv3_epoch_05.pth ... deeplabv3_best.pth
+├── poredjenje/                  # grafici poređenja modela
+│   ├── 1_poredjenje_metrika.png
+│   ├── 2_confusion_matrix.png
+│   ├── 3_tabela_rezultata.png
+│   └── evolucija/               # kriva učenja i tabele metrika kroz epohe
+├── vizualizacija/               # vizualizacija encoder/decoder mapa U-Net
+├── vizualizacija_poredjenja/    # vizualizacija predikcija na test tile-ovima
+│   └── evolucija/               # napredak predikcija kroz epohe
+├── pyproject.toml               # zavisnosti projekta (uv/pip)
 ├── README.md
 └── .gitignore
 ```
@@ -156,6 +171,22 @@ is_park_segmentation/
 ## Instalacija
 
 > **Napomena:** Potreban je **Python 3.12** (PyTorch još ne podržava 3.13+).
+
+### Sa uv (preporučeno)
+
+```bash
+# 1. Instaliraj uv (ako već nije instaliran)
+pip install uv
+
+# 2. Kreiraj okruženje i instaliraj sve zavisnosti (uključujući PyTorch CUDA)
+uv sync
+
+# 3. Aktiviraj okruženje
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # Linux/Mac
+```
+
+### Sa pip
 
 ```bash
 # 1. Kreiraj virtuelno okruženje
