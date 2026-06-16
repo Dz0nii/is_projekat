@@ -216,8 +216,9 @@ python src/vizualizuj_unet.py
 
 ## Tim
 
-- _Ime Prezime_ — _broj indeksa_
-- _Ime Prezime_ — _broj indeksa_
+- _Nikola Zečević_ — _RA 10/2023_
+- _Ivan Stojanović_ — _RA 15/2023_
+- _Luka Arsenović_ — _broj indeksa_
 
 **Predmet:** Inteligentni Sistemi
 **Fakultet:** Fakultet tehničkih nauka, Univerzitet u Novom Sadu

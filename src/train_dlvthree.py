@@ -84,6 +84,9 @@ if __name__ == '__main__':
     criterion = smp.losses.DiceLoss(mode='binary')
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.5)
 
+    evolucija_dir = os.path.join(PROJECT_ROOT, "models", "evolucija", "deeplabv3")
+    os.makedirs(evolucija_dir, exist_ok=True)
+
     best_val_loss = float('inf')
 
     for epoch in range(50):
@@ -112,9 +115,16 @@ if __name__ == '__main__':
 
         print(f"Epoch {epoch+1:02d}/50 | Train loss: {train_loss:.4f} | Val loss: {val_loss:.4f}")
 
+        if (epoch + 1) % 5 == 0:
+            snapshot_path = os.path.join(evolucija_dir, f"deeplabv3_epoch_{epoch+1:02d}.pth")
+            torch.save(model.state_dict(), snapshot_path)
+            print(f"           → Snapshot sacuvan: epoch {epoch+1}")
+
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             torch.save(model.state_dict(), model_out)
+            best_path = os.path.join(evolucija_dir, "deeplabv3_best.pth")
+            torch.save(model.state_dict(), best_path)
             print(f"           ✓ Novi best model sacuvan (val_loss={val_loss:.4f})")
 
     print("Trening zavrsen!")
