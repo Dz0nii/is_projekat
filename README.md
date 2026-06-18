@@ -249,14 +249,8 @@ python src/vizualizuj_unet.py
 
 - _Nikola Zečević_ — _RA 10/2023_
 - _Ivan Stojanović_ — _RA 15/2023_
-- _Luka Arsenović_ — _broj indeksa_
+- _Luka Arsenović_ — _RA 188/2023_
 
 **Predmet:** Inteligentni Sistemi
 **Fakultet:** Fakultet tehničkih nauka, Univerzitet u Novom Sadu
 **Godina:** 2025/2026
-
----
-
-## Licenca
-
-Projekat je razvijen u edukativne svrhe u okviru fakultetskog kursa.
